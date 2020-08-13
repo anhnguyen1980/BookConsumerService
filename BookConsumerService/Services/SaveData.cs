@@ -12,8 +12,8 @@ namespace BookConsumerService.Services
     public class SaveData : ISaveData
     {
         private readonly IBookService _bookService;
-        private readonly ILogger _logger;
-        public SaveData( IBookService bookService, ILogger logger)
+        private readonly ILogger<SaveData> _logger;
+        public SaveData( IBookService bookService, ILogger<SaveData> logger)
         {
             _bookService = bookService;
             _logger = logger;

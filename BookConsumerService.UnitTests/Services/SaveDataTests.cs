@@ -27,7 +27,7 @@ namespace BookConsumerService.UnitTests.Services
         public void ExecuteQueryDELETE_StateUnderTest_ExpectedBehavior()
         {
             //Arrange
-            Mock<ILogger> logger = new Mock<ILogger>();
+            Mock<ILogger<SaveData>> logger = new Mock<ILogger<SaveData>>();
             Mock<IBookService> bookService = _mockRepository.Create<IBookService>();
             var bookdto = _fixture.Create<BookDto>();
             MessageInfo messageInfo = _fixture.Build<MessageInfo>().With(x => x.BookDto, bookdto).With(x => x.ActionType, "DELETE").Create();
@@ -46,7 +46,7 @@ namespace BookConsumerService.UnitTests.Services
         public void ExecuteQuery_StateUnderTest_ExpectedBehavior(string actionType)
         {
             //Arrange
-            Mock<ILogger> logger = new Mock<ILogger>();
+            Mock<ILogger<SaveData>> logger = new Mock<ILogger<SaveData>>();
             Mock<IBookService> bookService = _mockRepository.Create<IBookService>();
             var bookdto = _fixture.Create<BookDto>();
             MessageInfo messageInfo = _fixture.Build<MessageInfo>().With(x => x.BookDto, bookdto).With(x => x.ActionType, actionType).Create();
@@ -65,7 +65,7 @@ namespace BookConsumerService.UnitTests.Services
         public void ExecuteQueryNULL_StateUnderTest_UnExpectedBehavior()
         {
             //Arrange
-            Mock<ILogger> logger = new Mock<ILogger>();
+            Mock<ILogger<SaveData>> logger = new Mock<ILogger<SaveData>>();
             Mock<IBookService> bookService = _mockRepository.Create<IBookService>();
             var saveData = new SaveData(bookService.Object, logger.Object);
             //Act &&                        //Assert
@@ -76,7 +76,7 @@ namespace BookConsumerService.UnitTests.Services
         public void ExecuteQueryANY_StateUnderTest_UnExpectedBehavior()
         {
             //Arrange
-            Mock<ILogger> logger = new Mock<ILogger>();
+            Mock<ILogger<SaveData>> logger = new Mock<ILogger<SaveData>>();
             Mock<IBookService> bookService = _mockRepository.Create<IBookService>();
             MessageInfo messageInfo = _fixture.Create<MessageInfo>();
             // bookService.Setup(x => x.DeleteBook(bookdto.Id)).ReturnsAsync(true);
