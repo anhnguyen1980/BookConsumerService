@@ -21,6 +21,7 @@ namespace BookConsumerService.Services.MessageQueue
         }
         public IMessageQueueClient CreateMessageQueue(string type)
         {
+            _logger.LogInformation($"Message queue type is {type}");
             if (type == "RabbitMQ")
             {
                 return new RabbitMQMessageQueueClient(_saveData, _configuration["RabbitMQ:ConnectionString"], _configuration["RabbitMQ:QueueName"], _logger);

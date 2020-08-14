@@ -24,7 +24,7 @@ namespace BookConsumerService.Services
             try
             {
                 MessageInfo messageInfo = JsonConvert.DeserializeObject<MessageInfo>(messageBody);
-                _logger.LogInformation($"Start to {messageInfo.ActionType}");
+                _logger.LogInformation($"Process data with request {messageInfo.ActionType}");
                 switch (messageInfo.ActionType.ToUpper())
                 {
                     case "POST":
@@ -42,7 +42,7 @@ namespace BookConsumerService.Services
             }
             catch (Exception ex)
             {
-               _logger.LogError($"An error occurred in SaveData clase :{Environment.NewLine} {ex.Message}");
+               _logger.LogError($"An error occurred in SaveData class :{Environment.NewLine} {ex.Message}");
                 throw ex;
             }
             return res;

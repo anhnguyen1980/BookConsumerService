@@ -51,9 +51,8 @@ namespace BookConsumerService.Services.MessageQueue
                     var messageBody = Encoding.UTF8.GetString(body.Span);
 
                     //    await SaveData.Execute(messageBody, _bookService);
-                    _logger.LogInformation($"Start to save the message body: {messageBody}");
+                    _logger.LogInformation($"Start to process the message body: {messageBody}");
                     await _saveData.ExecuteQuery(messageBody);
-                    _logger.LogInformation($"Saved data successfully.");
                 };
                 channel.BasicConsume(queue: _queueName,
                                      autoAck: true,

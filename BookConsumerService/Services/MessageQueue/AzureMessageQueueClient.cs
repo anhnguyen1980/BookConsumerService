@@ -73,20 +73,18 @@ namespace BookConsumerService.Services.MessageQueue
         {
 
             string messageBody = Encoding.UTF8.GetString(message.Body);
-
-            _logger.LogInformation($"Start to save the message body: {messageBody}");
-            // Process the message.
-            await _saveData.ExecuteQuery(messageBody);
-            _logger.LogInformation($"Saved data successfully.");
             // Console.WriteLine(messageInfo.actionType.ToUpper() + " successful." + Environment.NewLine);
             // Complete the message so that it is not received again.
             // This can be done only if the queue Client is created in ReceiveMode.PeekLock mode (which is the default).
             await queueClient.CompleteAsync(message.SystemProperties.LockToken);
-            _logger.LogInformation($"Saved message Number: {message.SystemProperties.SequenceNumber}");
+            //  _logger.LogInformation($"Saved message Number: {message.SystemProperties.SequenceNumber}");
             //Console.WriteLine($"Saved message Number: {message.SystemProperties.SequenceNumber}"+ Environment.NewLine);
             // Note: Use the cancellationToken passed as necessary to determine if the queueClient has already been closed.
             // If queueClient has already been closed, you can choose to not call CompleteAsync() or AbandonAsync() etc.
             // to avoid unnecessary exceptions.
+            // Process the message.
+            _logger.LogInformation($"Start to process the message body: {messageBody}");
+            await _saveData.ExecuteQuery(messageBody);
         }
         static Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
         {
